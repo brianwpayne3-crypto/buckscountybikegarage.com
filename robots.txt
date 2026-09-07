@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://buckscountybikegarage.com/sitemap.xml
+Sitemap: https://buckscountybicyclegarage.com/sitemap.xml
