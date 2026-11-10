@@ -56,7 +56,6 @@
   (function () {
     const landing = new URLSearchParams(window.location.search);
     const keys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "utm_id"];
-    const knownSocial = /^(facebook|instagram|fb|ig|meta)$/i;
     const socialClick = Boolean(landing.get("fbclid"));
     const campaign = {};
     for (const key of keys) {
@@ -65,7 +64,8 @@
     }
     // fbclid is a fallback for missing UTMs, not an override for explicit source tags.
     if (!campaign.utm_source && socialClick) campaign.utm_source = "facebook";
-    if (!campaign.utm_medium && socialClick) campaign.utm_medium = "paid_social";
+    // fbclid alone does not prove the visit was a paid ad (organic shares use it too).
+    if (!campaign.utm_medium && socialClick) campaign.utm_medium = "social";
     const campaignExists = Object.keys(campaign).length > 0;
     const links = document.querySelectorAll('a[href^="https://pedalfish.vercel.app/request-service"]');
     links.forEach((link) => {
