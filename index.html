@@ -43,5 +43,21 @@
 <section class="contact" id="contact"><div class="section"><div class="contact-grid"><div><div class="kicker">Need bike service?</div><h2>Start with a text.</h2><p class="text-first">Texting is a great way to get started. Send a quick message about your bike and what it needs, or send the details through the service request form.</p><p><a class="text-link" href="sms:+12673731184">Text 267-373-1184</a><a class="request-link" href="https://pedalfish.vercel.app/request-service">Start a service request</a></p><div class="contact-details"><p><strong>Prefer to call?</strong><br><a href="tel:+12673731184">267-373-1184</a></p><p><strong>Email</strong><br><a href="mailto:buckscountybicyclegarage@gmail.com">buckscountybicyclegarage@gmail.com</a></p><p><strong>Service area</strong><br>Yardley / Lower Makefield and surrounding Lower Bucks County</p><p><a href="https://maps.app.goo.gl/sCggLEzTykWhUMoh6" target="_blank" rel="noopener noreferrer">View Bucks County Bicycle Garage on Google</a></p><p class="fine">Home-based service · Yardley / Lower Makefield, Pennsylvania<br>Residential garage workshop · Service by appointment.</p></div></div></div></div></section>
 </main>
 <footer><div class="footerin"><span>© 2026 Bucks County Bicycle Garage · Home-based bicycle service · Yardley, PA · By appointment</span><div class="footerlinks"><a href="https://maps.app.goo.gl/sCggLEzTykWhUMoh6" target="_blank" rel="noopener noreferrer">Google Business Profile</a><a href="#contact">Contact</a></div></div></footer>
+<script>
+  // Keep ad campaign attribution when visitors continue to the PedalFish form.
+  // Organic visitors retain the existing link-specific UTM defaults.
+  (function () {
+    const landing = new URLSearchParams(window.location.search);
+    const keys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "utm_id"];
+    const campaignParams = keys.filter((key) => landing.has(key) && landing.get(key));
+    if (!campaignParams.length) return;
+    document.querySelectorAll('a[href^="https://pedalfish.vercel.app/request-service"]').forEach((link) => {
+      const destination = new URL(link.href);
+      for (const key of campaignParams) destination.searchParams.set(key, landing.get(key));
+      destination.searchParams.set("utm_referrer", "bcbg_website");
+      link.href = destination.toString();
+    });
+  })();
+</script>
 </body>
 </html>
